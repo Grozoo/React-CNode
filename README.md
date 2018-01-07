@@ -1,8 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 ## Preview
-![](https://github.com/RRung/cnode/blob/master/assets/HomePage.png)  
-![](https://github.com/RRung/cnode/blob/master/assets/Topics.png)  
+![](https://github.com/RRung/cnode/blob/master/assets/HomePage.png)![](https://github.com/RRung/cnode/blob/master/assets/Topics.png)  
 
 ## Demo
 [cnode](https://rrung.github.io/cnode/)  
