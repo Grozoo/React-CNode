@@ -84,7 +84,7 @@ footer{
 }
 
 /*********topics_contents***********/
-.topic{
+.topic,.wait{
   margin-top: 3em;
 }
 .topic_contents{
@@ -116,4 +116,12 @@ img[alt='goback']{
 .replies_list{
   margin: 2em 0;
   border-top: 1px solid #f0f0f0;
+}
+
+
+
+/*********wait****/
+.wait,.loading{
+  color: #08c;
+  text-align: center;
 }
