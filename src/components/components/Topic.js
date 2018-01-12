@@ -7,19 +7,20 @@ class Topic extends Component {
   constructor() {
     super()
     this.state = {
-      data: ''
+      data: '',
+      status: false
     }
   }
   componentWillMount() {
     fetch(`https://cnodejs.org/api/v1/${this.props.location.pathname}`)
       .then(res => res.json())
       .then(json => {
-        this.setState({ data: json.data })
+        this.setState({ data: json.data, status: true })
         document.title = json.data.title
       })
   }
   render() {
-    const wait = ">_< 等 等 啦 ~ ~ "
+    const wait = "正在加载中···"
     const noReplies = '(＃°Д°)还没有没有回复哦~~'
     return (
       <div>
@@ -28,7 +29,7 @@ class Topic extends Component {
           <span><Link to={`${this.props.location.pathname}/edit`}>编辑</Link></span>
         </div>
 
-        {this.state.data ?
+        {this.state.status ?
           <section className='topic'>
             <div className='section_header'>
               <h2>{this.state.data.title}</h2>
@@ -53,12 +54,11 @@ class Topic extends Component {
                       )
                     }
                   </div>
-                  : <span>{noReplies}</span>
+                  : <h1>{noReplies}</h1>
               }
             </div>
-
           </section>
-          : <h1>{wait}</h1>
+          : <h1 class="wait">{wait}</h1>
         }
 
       </div>

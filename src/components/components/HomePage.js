@@ -9,7 +9,8 @@ class HomePage extends Component {
         this.state = {
             tab: 'all',
             page: 1,
-            contents: ''
+            status: false,
+            loading: false
         }
     }
     componentWillMount() {
@@ -19,7 +20,9 @@ class HomePage extends Component {
                 this.setState((prevState) => {
                     return {
                         contents: json.data,
-                        page: prevState.page + 1
+                        page: prevState.page + 1,
+                        status: true,
+                        loading: false
                     }
                 })
             })
@@ -34,6 +37,7 @@ class HomePage extends Component {
         if (scrollTop + clientHeight === scrollHeight) {
             console.log(`滚呀滚 滚了一页啦~~, 现在是第${this.state.page}页哟 ❤`)
             //console.log(this.props)
+            this.setState({ loading: true })
             fetch(`https://cnodejs.org/api/v1/topics?tab=${this.props.location.search.slice(5)}&page=${this.state.page}`)
                 .then(response => response.json())
                 .then(json => {
@@ -41,11 +45,14 @@ class HomePage extends Component {
                         console.log('别刷啦，😭已经没有更多帖子惹~~~共计581页(本项目创建之时)')
                     }
                     this.setState((prevState) => {
-                        return { contents: prevState.contents.concat(json.data), page: prevState.page + 1 }
+                        return { contents: prevState.contents.concat(json.data), page: prevState.page + 1, loading: false }
                     })
 
                 })
         }
+    }
+    componentWillReceiveProps(nextProps, nextState) {
+        this.setState({ status: false })
     }
     componentWillUpdate(nextProps, nextState) {
         if (nextProps.location.search !== this.props.location.search) {
@@ -54,7 +61,7 @@ class HomePage extends Component {
                 .then(response => response.json())
                 .then(json => {
                     this.scroll.scrollTop = 0
-                    this.setState({ contents: json.data })
+                    this.setState({ contents: json.data, status: true })
                     //console.log(json.data)
                 })
             //console.log("update:" + nextProps.location.search, this.props.location.search)
@@ -64,13 +71,13 @@ class HomePage extends Component {
         this.scroll.removeEventListener('scroll', this.onScrollHandle)
     }
     render() {
-        const wait = ">_< 等 等 啦 ~ ~ "
+        const wait = "正在加载中···";
         return (
             <div className='rootMain'>
                 <Header />
                 <div className='main' ref={node => { this.scroll = node }}>
                     <div className='topic_list'>
-                        {this.state.contents ?
+                        {this.state.status ?
                             this.state.contents.map(
                                 (contents, key) =>
                                     <div key={key} className='list'>
@@ -85,11 +92,12 @@ class HomePage extends Component {
                                                 <span>· reply:{contents.reply_count}</span>
                                             </div>
                                         </Link></div>
-                            ) : <h1>{wait}</h1>
+                            ) : <h1 class="wait">{wait}</h1>
                         }
+                        {this.state.loading ? <h1 class="loading">{wait}</h1> : null}
                     </div>
                 </div>
-                <Footer />
+                {<Footer />}
             </div>
         )
     }
