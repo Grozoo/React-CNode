@@ -27,16 +27,12 @@ class HomePage extends Component {
                 })
             })
     }
-    componentDidMount() {
-        this.scroll.addEventListener('scroll', this.onScrollHandle)
-    }
     onScrollHandle = async (event) => {
         const clientHeight = event.target.clientHeight
         const scrollHeight = event.target.scrollHeight
         const scrollTop = event.target.scrollTop
         if (scrollTop + clientHeight === scrollHeight) {
             console.log(`滚呀滚 滚了一页啦~~, 现在是第${this.state.page}页哟 ❤`)
-            //console.log(this.props)
             this.setState({ loading: true })
             fetch(`https://cnodejs.org/api/v1/topics?tab=${this.props.location.search.slice(5)}&page=${this.state.page}`)
                 .then(response => response.json())
@@ -56,26 +52,20 @@ class HomePage extends Component {
     }
     componentWillUpdate(nextProps, nextState) {
         if (nextProps.location.search !== this.props.location.search) {
-            //console.log(this.props,nextProps.location)
             fetch(`https://cnodejs.org/api/v1/topics?tab=${nextProps.location.search.slice(5)}`)
                 .then(response => response.json())
                 .then(json => {
                     this.scroll.scrollTop = 0
                     this.setState({ contents: json.data, status: true })
-                    //console.log(json.data)
                 })
-            //console.log("update:" + nextProps.location.search, this.props.location.search)
         }
-    }
-    componentWillUnmount() { // 卸载监听
-        this.scroll.removeEventListener('scroll', this.onScrollHandle)
     }
     render() {
         const wait = "正在加载中···";
         return (
             <div className='rootMain'>
                 <Header />
-                <div className='main' ref={node => { this.scroll = node }}>
+                <div className='main' onScroll={this.onScrollHandle} ref={node => { this.scroll = node }}>
                     <div className='topic_list'>
                         {this.state.status ?
                             this.state.contents.map(
@@ -92,9 +82,9 @@ class HomePage extends Component {
                                                 <span>· reply:{contents.reply_count}</span>
                                             </div>
                                         </Link></div>
-                            ) : <h1 class="wait">{wait}</h1>
+                            ) : <h1 className="wait">{wait}</h1>
                         }
-                        {this.state.loading ? <h1 class="loading">{wait}</h1> : null}
+                        {this.state.loading ? <h1 className="loading">{wait}</h1> : null}
                     </div>
                 </div>
                 {<Footer />}
