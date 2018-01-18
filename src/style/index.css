@@ -100,13 +100,11 @@ footer{
   top: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
-img[alt='goback']{
-  height: 3em;
-  width: 3em;
+.topic img{
+  max-width: 100%;
 }
-
 .user_action{
   float: right;
 }
@@ -125,3 +123,4 @@ img[alt='goback']{
   color: #08c;
   text-align: center;
 }
+

@@ -24,8 +24,8 @@ class Topic extends Component {
     const noReplies = '(＃°Д°)还没有没有回复哦~~'
     return (
       <div>
-        <div className='nav topic_nav' onClick={() => this.props.history.goBack()}>
-          <span>返回</span>
+        <div className='nav topic_nav'>
+          <span onClick={() => this.props.history.goBack()}>返回</span>
           <span><Link to={`${this.props.location.pathname}/edit`}>编辑</Link></span>
         </div>
 
@@ -58,7 +58,7 @@ class Topic extends Component {
               }
             </div>
           </section>
-          : <h1 class="wait">{wait}</h1>
+          : <h1 className="wait">{wait}</h1>
         }
 
       </div>

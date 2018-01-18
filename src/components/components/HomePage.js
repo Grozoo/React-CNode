@@ -5,7 +5,7 @@ import moment from 'moment'
 import { Header, Footer } from '../index'
 class HomePage extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             tab: 'all',
             page: 1,
@@ -27,7 +27,7 @@ class HomePage extends Component {
                 })
             })
     }
-    onScrollHandle = async (event) => {
+    onScrollHandle = (event) => {
         const clientHeight = event.target.clientHeight
         const scrollHeight = event.target.scrollHeight
         const scrollTop = event.target.scrollTop
@@ -81,7 +81,8 @@ class HomePage extends Component {
                                                 <span>· 发表于:{moment(`${contents.create_at}`).fromNow()}</span>
                                                 <span>· reply:{contents.reply_count}</span>
                                             </div>
-                                        </Link></div>
+                                        </Link>
+                                    </div>
                             ) : <h1 className="wait">{wait}</h1>
                         }
                         {this.state.loading ? <h1 className="loading">{wait}</h1> : null}

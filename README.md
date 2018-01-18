@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ![](https://github.com/RRung/cnode/blob/master/assets/HomePage.png)![](https://github.com/RRung/cnode/blob/master/assets/Topics.png)  
 
 ## Demo
-[cnode](http://secret.runtua.cn/)
+[cnode](http://cnode.runtua.cn/)  
 参考文章：[Deployment > GitHub Pages](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#github-pages)  
 
 ## Quick Overview
