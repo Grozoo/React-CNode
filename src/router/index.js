@@ -1,7 +1,7 @@
 import React from "react"
 import { Switch, BrowserRouter as Router, Route, Redirect } from "react-router-dom"
 
-import { HomePage, Login, NewTopic, User, UserHome, Update, Message, Topic } from './components/index'
+import { HomePage, Login, NewTopic, User, UserHome, Update, Message, Topic } from '../containers/index'
 
 //重定向
 const LoginComponent = ({ component: Component, ...data }) => (

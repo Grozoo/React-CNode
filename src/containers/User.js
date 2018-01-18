@@ -7,7 +7,7 @@ class User extends Component {
       data: ''
     }
   }
-  componentWillMount() {
+  componenDidMount() {
     fetch(`https://cnodejs.org/api/v1/${this.props.location.pathname}`)
       .then(res => res.json())
       .then(json => {

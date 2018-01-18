@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-
-import { Footer } from "../index"
+import { Footer } from "../components/index"
 
 class Login extends Component {
   constructor() {
@@ -11,7 +10,7 @@ class Login extends Component {
   }
 
   componentWillMount() {
-
+    alert('请登录');
   }
   handelChange = (e) => {
     this.setState({

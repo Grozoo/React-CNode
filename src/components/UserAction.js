@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 
 class UpReply extends Component {
@@ -20,7 +20,7 @@ class UpReply extends Component {
   /*
    * error_msg:"您的账户被禁用"
    * 所以此处无法确定是否成功 =》理论上来说应该没错
-   * 
+   *
    */
   up = () => {
     if (!localStorage.token) {
