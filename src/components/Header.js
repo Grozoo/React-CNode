@@ -1,8 +1,7 @@
 import React from "react"
 import { NavLink } from 'react-router-dom'
-const active = (location, data) => {
-    //console.log(location, data)
-    return location.search === data
+const active = (match, location) => {
+    return match.search === location;
 }
 
 const Header = () => {

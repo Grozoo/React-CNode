@@ -14,7 +14,7 @@ const LoginComponent = ({ component: Component, ...data }) => (
             }} />
     )} />
 )
-
+const NotFound = () =><h1>404 NotFound</h1>
 const Routes = () => {
     return (
         <Router>
@@ -27,6 +27,7 @@ const Routes = () => {
                 <Route exact path='/topic/:id' component={Topic} />
                 <Route path='/topic/:id/edit' component={Update} />
                 <Route path='/user/:loginname' component={User} />
+                <Route path='*' component={NotFound} />
             </Switch>
         </Router>
     )
