@@ -7,7 +7,7 @@ class User extends Component {
       data: ''
     };
   }
-  componenDidMount() {
+  componentDidMount() {
     fetch(`https://cnodejs.org/api/v1/${this.props.location.pathname}`)
       .then(res => res.json())
       .then(json => {
@@ -17,7 +17,6 @@ class User extends Component {
   }
 
   render() {
-    console.log(`User` + this.props);
     const allData = this.state.data.data;
     return (
       <div>

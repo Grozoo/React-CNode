@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
  * @param {Array} list 接受数组渲染
  *
  */
-const TopicLists = ({ list }) => (
+const TopicLists = ({ list = [] }) => (
   <div className="topic_list">
     {list.map((item, key) => (
       <div key={key} className="list">
