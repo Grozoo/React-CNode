@@ -1,23 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class Update extends Component {
   constructor() {
-    super()
-    this.state = {
-
-    }
+    super();
+    this.state = {};
   }
   componentWillMount() {
-    fetch(``)
+    fetch(``);
   }
   render() {
-    console.log(`Update`)
-    return (
-      <div>
-        edit
-      </div>
-    )
+    console.log(`Update`);
+    return <div>edit</div>;
   }
 }
 
-export default Update
+export default Update;

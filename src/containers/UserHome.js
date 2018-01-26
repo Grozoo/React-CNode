@@ -1,7 +1,5 @@
-import React, { Component } from 'react'
-import { Footer } from "../components/index"
-
-
+import React, { Component } from 'react';
+import { Footer } from '../components/index';
 
 class UserHome extends Component {
   /* constructor(){
@@ -11,13 +9,11 @@ class UserHome extends Component {
     return (
       <div>
         <header>UserHome</header>
-        <div>
-
-        </div>
+        <div />
         <Footer />
       </div>
-    )
+    );
   }
 }
 
-export default UserHome
+export default UserHome;
