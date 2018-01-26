@@ -43,9 +43,7 @@ class HomePage extends Component {
         .then(response => response.json())
         .then(json => {
           if (json.data.length === 0) {
-            console.log(
-              '别刷啦，😭已经没有更多帖子惹~~~共计581页(本项目创建之时)'
-            );
+            console.log('over');
           }
           this.setState(prevState => {
             return {
@@ -57,22 +55,19 @@ class HomePage extends Component {
         });
     }
   };
-  componentWillReceiveProps(nextProps, nextState) {
+  componentWillReceiveProps(nextProps) {
+    //切换tab后抓取新数据
     this.setState({ status: false });
-  }
-  componentWillUpdate(nextProps, nextState) {
-    if (nextProps.location.search !== this.props.location.search) {
-      fetch(
-        `https://cnodejs.org/api/v1/topics?tab=${nextProps.location.search.slice(
-          5
-        )}`
-      )
-        .then(response => response.json())
-        .then(json => {
-          this.scroll.scrollTop = 0;
-          this.setState({ contents: json.data, status: true });
-        });
-    }
+    fetch(
+      `https://cnodejs.org/api/v1/topics?tab=${nextProps.location.search.slice(
+        5
+      )}`
+    )
+      .then(response => response.json())
+      .then(json => {
+        this.scroll.scrollTop = 0;
+        this.setState({ contents: json.data, status: true });
+      });
   }
   render() {
     const wait = '正在加载中···';
