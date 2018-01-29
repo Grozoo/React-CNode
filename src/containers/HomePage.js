@@ -8,7 +8,8 @@ class HomePage extends Component {
       tab: 'all',
       page: 1,
       status: false,
-      loading: false
+      loading: false,
+      error: null
     };
   }
   componentDidMount() {
@@ -27,7 +28,8 @@ class HomePage extends Component {
             loading: false
           };
         });
-      });
+      })
+      .catch(e => this.setState({ error: e }));
   }
   onScrollHandle = event => {
     const clientHeight = event.target.clientHeight;
@@ -52,7 +54,8 @@ class HomePage extends Component {
               loading: false
             };
           });
-        });
+        })
+        .catch(e => this.setState({ error: e }));
     }
   };
   componentWillReceiveProps(nextProps) {
@@ -67,10 +70,14 @@ class HomePage extends Component {
       .then(json => {
         this.scroll.scrollTop = 0;
         this.setState({ contents: json.data, status: true });
-      });
+      })
+      .catch(e => this.setState({ error: e }));
   }
   render() {
     const wait = '正在加载中···';
+    if (error) {
+      return <p>Something went wrong.</p>;
+    }
     return (
       <div className="rootMain">
         <Header />
