@@ -27,6 +27,7 @@ html,
   margin: 0 auto;
 }
 .nav {
+  position: fixed;
   background-color: beige;
   max-width: 38em;
   width: 100%;
