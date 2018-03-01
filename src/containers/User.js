@@ -18,7 +18,7 @@ class User extends Component {
   render() {
     const allData = this.state.data.data;
     return (
-      <div>
+      <>
         {this.state.data ? (
           <div className="user">
             <img src={allData.avatar_url} alt={allData.loginname} />
@@ -44,7 +44,7 @@ class User extends Component {
         ) : (
           <span />
         )}
-      </div>
+      </>
     );
   }
 }

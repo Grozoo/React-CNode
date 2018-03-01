@@ -5,17 +5,15 @@
 ![](https://github.com/RRung/cnode/blob/master/assets/UserHome.png)
 
 ## Demo
-[CNode](http://cnode.runtua.cn/)  
+[cnode](http://cnode.runtua.cn/)  
 参考文章：[Deployment > GitHub Pages](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#github-pages)  
 
 ## Quick Overview
 
-```$ git clone git@github.com:RRung/cnode.git ```  
-```$ cd cnode```  
-```$ yarn install```  
-```$ yarn start```
-
-快速预览 -> src/index -> router/index
+``` git clone git@github.com:RRung/cnode.git ```  
+```cd cnode```  
+```yarn install``` or ```npm install```  
+```yarn start``` or ```npm stat```
 
 ## About Cli
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).  
