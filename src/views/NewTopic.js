@@ -11,13 +11,11 @@ class NewTopic extends Component {
     };
   }
   contentsChange = e => {
-    //console.log(e.target)
     this.setState({
       [e.target.name]: e.target.value
     });
   };
   handleSubmit = () => {
-    console.log(localStorage.token);
     fetch(`https://cnodejs.org/api/v1/topics/`, {
       method: 'POST',
       headers: {
@@ -33,7 +31,6 @@ class NewTopic extends Component {
     }).then(res => {
       console.log(this.props, res.json());
       //this.props.history.push(`/topic/${res}`)
-      //频率限制：当前操作每天可以进行 7 次~~~~~~~
     });
   };
   render() {

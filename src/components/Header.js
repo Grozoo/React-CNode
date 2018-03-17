@@ -5,18 +5,19 @@ const active = (match, location) => {
 };
 
 const Header = () => {
+  const activeStyle = {
+    fontWeight: 'bold',
+    border: '0.08em solid sandybrown',
+    borderBottom: '0',
+    borderTopLeftRadius: '0.2em'
+  };
   return (
     <header className="nav">
       <ul>
         <li>
           <NavLink
             to="/"
-            activeStyle={{
-              fontWeight: 'bold',
-              border: '0.08em solid sandybrown',
-              borderBottom: '0',
-              borderTopLeftRadius: '0.2em'
-            }}
+            activeStyle={activeStyle}
             isActive={(match, location) => active(location, '')}
           >
             全部
@@ -25,11 +26,7 @@ const Header = () => {
         <li>
           <NavLink
             to={{ pathname: '/', search: '?tab=good' }}
-            activeStyle={{
-              fontWeight: 'bold',
-              border: '0.08em solid sandybrown',
-              borderBottom: '0'
-            }}
+            activeStyle={activeStyle}
             isActive={(match, location) => active(location, '?tab=good')}
           >
             精华
@@ -38,11 +35,7 @@ const Header = () => {
         <li>
           <NavLink
             to={{ pathname: '/', search: '?tab=share' }}
-            activeStyle={{
-              fontWeight: 'bold',
-              border: '0.08em solid sandybrown',
-              borderBottom: '0'
-            }}
+            activeStyle={activeStyle}
             isActive={(match, location) => active(location, '?tab=share')}
           >
             分享
@@ -51,11 +44,7 @@ const Header = () => {
         <li>
           <NavLink
             to={{ pathname: '/', search: '?tab=ask' }}
-            activeStyle={{
-              fontWeight: 'bold',
-              border: '0.08em solid sandybrown',
-              borderBottom: '0'
-            }}
+            activeStyle={activeStyle}
             isActive={(match, location) => active(location, '?tab=ask')}
           >
             问答
@@ -64,11 +53,7 @@ const Header = () => {
         <li>
           <NavLink
             to={{ pathname: '/', search: '?tab=job' }}
-            activeStyle={{
-              fontWeight: 'bold',
-              border: '0.08em solid sandybrown',
-              borderBottom: '0'
-            }}
+            activeStyle={activeStyle}
             isActive={(match, location) => active(location, '?tab=job')}
           >
             招聘
@@ -77,11 +62,7 @@ const Header = () => {
         <li>
           <NavLink
             to={{ pathname: '/', search: '?tab=dev' }}
-            activeStyle={{
-              fontWeight: 'bold',
-              border: '0.08em solid sandybrown',
-              borderBottom: '0'
-            }}
+            activeStyle={activeStyle}
             isActive={(match, location) => active(location, '?tab=dev')}
           >
             测试区

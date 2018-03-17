@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Footer } from '../components/index';
+import { Footer } from '../../components/index';
+//import Axios from '../../util/axios'
 
 class Login extends Component {
   constructor() {
@@ -8,7 +9,6 @@ class Login extends Component {
       token: ''
     };
   }
-
   componentWillMount() {
     alert('请登录');
   }
@@ -18,9 +18,13 @@ class Login extends Component {
     });
   };
   handleSubmit = () => {
-    if (this.state.token === '') {
-      alert('你什么也没填哦(⊙o⊙)？');
+    const token = this.state.token;
+    if (token === '') {
+      //alert('你什么也没填哦(⊙o⊙)？');
     }
+    /* Axios.post('accesstoken',{ token }).then(res=>{
+      console.log('等待···')
+    }) */
     fetch('https://cnodejs.org/api/v1/accesstoken', {
       method: 'POST',
       headers: {

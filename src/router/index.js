@@ -14,8 +14,9 @@ import {
   UserHome,
   Update,
   Message,
-  Topic
-} from '../containers/index';
+  Topic,
+  NotMatch
+} from '../views/index';
 
 //重定向
 const LoginComponent = ({ component: Component, ...data }) => (
@@ -35,7 +36,6 @@ const LoginComponent = ({ component: Component, ...data }) => (
     }
   />
 );
-const NotFound = () => <h1>404 NotFound</h1>;
 const Routes = () => {
   return (
     <Router>
@@ -48,7 +48,7 @@ const Routes = () => {
         <Route exact path="/topic/:id" component={Topic} />
         <Route path="/topic/:id/edit" component={Update} />
         <Route path="/user/:loginname" component={User} />
-        <Route path="*" component={NotFound} />
+        <Route path="*" component={NotMatch} />
       </Switch>
     </Router>
   );
