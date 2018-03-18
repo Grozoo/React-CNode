@@ -10,7 +10,7 @@ class Login extends Component {
     };
   }
   componentWillMount() {
-    alert('请登录');
+    //alert('请登录');
   }
   handelChange = e => {
     this.setState({
@@ -49,7 +49,6 @@ class Login extends Component {
       });
   };
   render() {
-    console.log(`Login`);
     return (
       <div>
         <header>

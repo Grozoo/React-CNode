@@ -1,75 +1,59 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-const active = (match, location) => {
-  return match.search === location;
-};
+import { Menu, Row, Col } from 'antd';
 
-const Header = () => {
-  const activeStyle = {
-    fontWeight: 'bold',
-    border: '0.08em solid sandybrown',
-    borderBottom: '0',
-    borderTopLeftRadius: '0.2em'
+class Header extends React.Component {
+  state = {
+    current: window.location.search.slice(5) || 'all'
   };
-  return (
-    <header className="nav">
-      <ul>
-        <li>
-          <NavLink
-            to="/"
-            activeStyle={activeStyle}
-            isActive={(match, location) => active(location, '')}
+  handleClick = e => {
+    this.setState({
+      current: e.key
+    });
+  };
+  render() {
+    return (
+      <header id="header">
+        <Row type="flex" justify="space-around">
+          <Menu
+            onClick={this.handleClick}
+            selectedKeys={[this.state.current]}
+            mode="horizontal"
           >
-            全部
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to={{ pathname: '/', search: '?tab=good' }}
-            activeStyle={activeStyle}
-            isActive={(match, location) => active(location, '?tab=good')}
-          >
-            精华
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to={{ pathname: '/', search: '?tab=share' }}
-            activeStyle={activeStyle}
-            isActive={(match, location) => active(location, '?tab=share')}
-          >
-            分享
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to={{ pathname: '/', search: '?tab=ask' }}
-            activeStyle={activeStyle}
-            isActive={(match, location) => active(location, '?tab=ask')}
-          >
-            问答
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to={{ pathname: '/', search: '?tab=job' }}
-            activeStyle={activeStyle}
-            isActive={(match, location) => active(location, '?tab=job')}
-          >
-            招聘
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to={{ pathname: '/', search: '?tab=dev' }}
-            activeStyle={activeStyle}
-            isActive={(match, location) => active(location, '?tab=dev')}
-          >
-            测试区
-          </NavLink>
-        </li>
-      </ul>
-    </header>
-  );
-};
+            <Menu.Item key="all">
+              <NavLink to="/">全部</NavLink>
+            </Menu.Item>
+
+            <Menu.Item key="good">
+              <NavLink to={{ pathname: '/', search: '?tab=good' }}>
+                精华
+              </NavLink>
+            </Menu.Item>
+
+            <Menu.Item key="share">
+              <NavLink to={{ pathname: '/', search: '?tab=share' }}>
+                分享
+              </NavLink>
+            </Menu.Item>
+
+            <Menu.Item key="ask">
+              <NavLink to={{ pathname: '/', search: '?tab=ask' }}>问答</NavLink>
+            </Menu.Item>
+
+            <Menu.Item key="job">
+              <NavLink to={{ pathname: '/', search: '?tab=job' }}>招聘</NavLink>
+            </Menu.Item>
+
+            <Menu.Item key="dev">
+              <NavLink to={{ pathname: '/', search: '?tab=dev' }}>
+                测试区
+              </NavLink>
+            </Menu.Item>
+          </Menu>
+        </Row>
+      </header>
+    );
+  }
+}
+
 export default Header;

@@ -1,22 +1,27 @@
-## Preview
+## 预览
 ![](https://github.com/RRung/cnode/blob/master/assets/HomePage.png)
 ![](https://github.com/RRung/cnode/blob/master/assets/Topics.png)  
 ![](https://github.com/RRung/cnode/blob/master/assets/Loading.png)
-![](https://github.com/RRung/cnode/blob/master/assets/UserHome.png)
+![](https://github.com/RRung/cnode/blob/master/assets/UserHome.png)  
 
-## Demo
-[cnode](http://cnode.runtua.cn/)  
-参考文章：[Deployment > GitHub Pages](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#github-pages)  
+[在线地址：React-CNode](http://cnode.runtua.cn/)    
 
-## Quick Overview
+## 开始
 
-``` git clone git@github.com:RRung/cnode.git ```  
-```cd cnode```  
-```yarn install``` or ```npm install```  
-```yarn start``` or ```npm stat```
+```$ git clone git@github.com:RRung/cnode.git```  
+```$ cd cnode```  
+```$ yarn install```  
+```$ yarn start```
 
-## About Cli
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).  
+## Use
+- [Create React App](https://github.com/facebookincubator/create-react-app)
+- React, React-Router-v4
+- [Ant Desigin](https://ant.design/index-cn)
+- Axios
+- Moment  
+  *时间格式化*
+- react-infinite-scroller  
+  *React滑动加载组件*
+- Prettier  
+  *代码格式化插件*
 
-Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).

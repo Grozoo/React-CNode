@@ -18,6 +18,7 @@ import {
   NotMatch
 } from '../views/index';
 
+localStorage.token = 1;
 //重定向
 const LoginComponent = ({ component: Component, ...data }) => (
   <Route
