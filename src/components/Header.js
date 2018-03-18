@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Menu, Row, Col } from 'antd';
+import { Menu, Row } from 'antd';
 
 class Header extends React.Component {
   state = {
