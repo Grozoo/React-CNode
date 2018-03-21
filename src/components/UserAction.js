@@ -1,42 +1,48 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import FaThumbsOUp from 'react-icons/lib/fa/thumbs-o-up';
+import FaThumbsUp from 'react-icons/lib/fa/thumbs-up';
+import FaMailReply from 'react-icons/lib/fa/mail-reply';
+import { message } from 'antd';
 
 class UpReply extends Component {
   constructor() {
     super();
     this.state = {
-      ups: '',
+      ups: 0,
+      up: false,
       content: '',
       display: 'none'
     };
   }
   componentWillMount() {
     this.setState({
-      sup: this.props.ups.length
+      ups: this.props.ups.length
     });
   }
-  /*
-   * error_msg:"您的账户被禁用"
-   * 所以此处无法确定是否成功 =》理论上来说应该没错
-   *
-   */
   up = () => {
     if (!localStorage.token) {
-      console.log('你还没有登陆哦~~');
+      message.warning('你还没有登陆哦~~');
       return;
     }
-    fetch(`https://cnodejs.org/api/v1/reply/${this.props.replyId}/ups `, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    axios
+      .post(`/reply/${this.props.replyId}/ups`, {
         accesstoken: localStorage.token
       })
-    })
-      .then(res => res.json())
-      .then(json => {
-        console.log(json);
+      .then(res => {
+        if (res.data.action === 'up') {
+          this.setState(prevState => ({
+            ups: prevState.ups + 1,
+            up: !prevState.up
+          }));
+        } else if (res.data.action === 'down') {
+          this.setState(prevState => ({
+            ups: prevState.ups - 1,
+            up: !prevState.up
+          }));
+        } else {
+          message.warning('出错了XD');
+        }
       });
   };
   write = e => {
@@ -44,41 +50,36 @@ class UpReply extends Component {
   };
   replyShow = () => {
     if (!localStorage.token) {
-      console.log('你还没有登陆哦~~');
+      message.warning('你还没有登陆哦~~');
       return;
     }
     this.setState({ display: 'block' });
   };
   reply = () => {
-    fetch(`https://cnodejs.org/api/v1/${this.props.tipcId}/replies `, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    axios
+      .post(`${this.props.tipcId}/replies`, {
         accesstoken: localStorage.token,
         content: this.state.content,
         reply_id: this.props.replyId
       })
-    })
-      .then(res => res.json())
-      .then(json => {
-        console.log(json);
+      .then(res => {
+        console.log(res);
       });
   };
   render() {
+    console.log(this.props);
     return (
       <div className="user_action">
-        <span onClick={this.up} className="up_btn">
-          点赞{this.props.ups.length}
+        <span onClick={this.up} style={{ padding: '0 4px ' }}>
+          {this.state.up ? <FaThumbsUp /> : <FaThumbsOUp />}
+          {this.state.ups || null}
         </span>
-        <span onClick={this.replyShow} className="reply_btn">
-          回复
+        <span onClick={this.replyShow} style={{ padding: ' 0 4px' }}>
+          <FaMailReply />
         </span>
         <div style={{ display: this.state.display }}>
           <textarea onChange={this.write} />
-          <button onClick={this.reply}>aaaa</button>
+          <button onClick={this.reply}>回复</button>
         </div>
       </div>
     );

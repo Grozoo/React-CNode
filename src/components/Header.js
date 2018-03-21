@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Menu, Row } from 'antd';
+import { Menu } from 'antd';
 
 class Header extends React.Component {
   state = {
@@ -14,43 +14,35 @@ class Header extends React.Component {
   render() {
     return (
       <header id="header">
-        <Row type="flex" justify="space-around">
-          <Menu
-            onClick={this.handleClick}
-            selectedKeys={[this.state.current]}
-            mode="horizontal"
-          >
-            <Menu.Item key="all">
-              <NavLink to="/">全部</NavLink>
-            </Menu.Item>
+        <Menu
+          onClick={this.handleClick}
+          selectedKeys={[this.state.current]}
+          mode="horizontal"
+        >
+          <Menu.Item key="all">
+            <NavLink to="/">全部</NavLink>
+          </Menu.Item>
 
-            <Menu.Item key="good">
-              <NavLink to={{ pathname: '/', search: '?tab=good' }}>
-                精华
-              </NavLink>
-            </Menu.Item>
+          <Menu.Item key="good">
+            <NavLink to={{ pathname: '/', search: '?tab=good' }}>精华</NavLink>
+          </Menu.Item>
 
-            <Menu.Item key="share">
-              <NavLink to={{ pathname: '/', search: '?tab=share' }}>
-                分享
-              </NavLink>
-            </Menu.Item>
+          <Menu.Item key="share">
+            <NavLink to={{ pathname: '/', search: '?tab=share' }}>分享</NavLink>
+          </Menu.Item>
 
-            <Menu.Item key="ask">
-              <NavLink to={{ pathname: '/', search: '?tab=ask' }}>问答</NavLink>
-            </Menu.Item>
+          <Menu.Item key="ask">
+            <NavLink to={{ pathname: '/', search: '?tab=ask' }}>问答</NavLink>
+          </Menu.Item>
 
-            <Menu.Item key="job">
-              <NavLink to={{ pathname: '/', search: '?tab=job' }}>招聘</NavLink>
-            </Menu.Item>
+          <Menu.Item key="job">
+            <NavLink to={{ pathname: '/', search: '?tab=job' }}>招聘</NavLink>
+          </Menu.Item>
 
-            <Menu.Item key="dev">
-              <NavLink to={{ pathname: '/', search: '?tab=dev' }}>
-                测试区
-              </NavLink>
-            </Menu.Item>
-          </Menu>
-        </Row>
+          <Menu.Item key="dev">
+            <NavLink to={{ pathname: '/', search: '?tab=dev' }}>测试区</NavLink>
+          </Menu.Item>
+        </Menu>
       </header>
     );
   }

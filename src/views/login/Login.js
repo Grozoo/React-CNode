@@ -1,69 +1,67 @@
 import React, { Component } from 'react';
 import { Footer } from '../../components/index';
-//import Axios from '../../util/axios'
+import axios from 'axios';
+import { message } from 'antd';
+import { Form, Icon, Input, Button } from 'antd';
+import './login.css';
+
+const FormItem = Form.Item;
 
 class Login extends Component {
-  constructor() {
-    super();
-    this.state = {
-      token: ''
-    };
-  }
   componentWillMount() {
-    //alert('请登录');
+    message.warning('请登录');
   }
-  handelChange = e => {
-    this.setState({
-      token: e.target.value
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        axios
+          .post('accesstoken', { accesstoken: values.token })
+          .then(res => {
+            if (res.data.success) {
+              localStorage.token = values.token;
+              console.log('success');
+              let pathname =
+                this.props.history.location.state.from.pathname || '/';
+              this.props.history.push(pathname);
+              console.log('success');
+            }
+          })
+          .catch(error => {
+            message.warning('请检查你的token是否正确');
+          });
+      }
     });
   };
-  handleSubmit = () => {
-    const token = this.state.token;
-    if (token === '') {
-      //alert('你什么也没填哦(⊙o⊙)？');
-    }
-    /* Axios.post('accesstoken',{ token }).then(res=>{
-      console.log('等待···')
-    }) */
-    fetch('https://cnodejs.org/api/v1/accesstoken', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        accesstoken: this.state.token
-      })
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          localStorage.token = this.state.token;
-          let { pathname } = this.props.history.location.state.from;
-          console.log(data);
-          this.props.history.push(pathname);
-        }
-      })
-      .catch(error => {
-        console.log(error, '出错啦(●ˇ∀ˇ●)');
-      });
-  };
   render() {
+    const { getFieldDecorator } = this.props.form;
     return (
-      <div>
-        <header>
-          <h2>登录</h2>
-        </header>
-        <div>
-          <input
-            placeholder="这里填上Access Token~~~"
-            onChange={this.handelChange}
-          />
-          <button onClick={this.handleSubmit}>提交</button>
-        </div>
-        <Footer />
-      </div>
+      <Form onSubmit={this.handleSubmit} className="login-form">
+        <FormItem>
+          {getFieldDecorator('token', {
+            rules: [{ required: true, message: 'Please input your token!' }]
+          })(
+            <Input
+              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="password"
+              placeholder="token"
+            />
+          )}
+        </FormItem>
+        <FormItem>
+          <a className="login-form-forgot" href="https://cnodejs.org/setting">
+            register now!
+          </a>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+          >
+            Log in
+          </Button>
+        </FormItem>
+      </Form>
     );
   }
 }
-export default Login;
+export default Form.create()(Login);

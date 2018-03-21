@@ -17,7 +17,7 @@
 - [Create React App](https://github.com/facebookincubator/create-react-app)
 - React, React-Router-v4
 - [Ant Desigin](https://ant.design/index-cn)
-- Axios
+- axios
 - Moment  
   *时间格式化*
 - react-infinite-scroller  

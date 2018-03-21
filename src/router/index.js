@@ -17,8 +17,8 @@ import {
   Topic,
   NotMatch
 } from '../views/index';
-
-localStorage.token = 1;
+import { Affix } from 'antd';
+import FaGithub from 'react-icons/lib/fa/github';
 //重定向
 const LoginComponent = ({ component: Component, ...data }) => (
   <Route
@@ -40,17 +40,28 @@ const LoginComponent = ({ component: Component, ...data }) => (
 const Routes = () => {
   return (
     <Router>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <LoginComponent path="/newtopic" component={NewTopic} />
-        <LoginComponent path="/messages" component={Message} />
-        <LoginComponent path="/userhome" component={UserHome} />
-        <Route path="/login" component={Login} />
-        <Route exact path="/topic/:id" component={Topic} />
-        <Route path="/topic/:id/edit" component={Update} />
-        <Route path="/user/:loginname" component={User} />
-        <Route path="*" component={NotMatch} />
-      </Switch>
+      <React.Fragment>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <LoginComponent path="/newtopic" component={NewTopic} />
+          <LoginComponent path="/messages" component={Message} />
+          <LoginComponent path="/userhome" component={UserHome} />
+          <Route path="/login" component={Login} />
+          <Route exact path="/topic/:id" component={Topic} />
+          <Route path="/topic/:id/edit" component={Update} />
+          <Route path="/user/:loginname" component={User} />
+          <Route path="*" component={NotMatch} />
+        </Switch>
+        <Affix style={{ position: 'absolute', bottom: '10%', right: '10%', cursor: "pointer" }}>
+          <i
+            onClick={() =>
+              (window.location = 'https://github.com/ShiYiYa/cnode')
+            }
+          >
+            <FaGithub style={{ width: 50, height: 50 }} />
+          </i>
+        </Affix>
+      </React.Fragment>
     </Router>
   );
 };

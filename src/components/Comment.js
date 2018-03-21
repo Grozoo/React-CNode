@@ -1,28 +1,51 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import UserAction from './UserAction';
+import { List, Avatar } from 'antd';
 
-const Comment = ({ comment = [] }) => (
-  <div className="reply">
-    {comment.length ? (
-      comment.map((item, index) => (
-        <div key={index} className="replies_list">
-          <img
-            className="avatar_url"
-            src={item.author.avatar_url}
-            alt="avatar"
-          />
-          <Link to={`/user/${item.author.loginname}`}>
-            {item.author.loginname}
-          </Link>
-          <UserAction replyId={item.id} ups={item.ups} tipcId={item.reply_id} />
-          <div dangerouslySetInnerHTML={{ __html: item.content }} />
-        </div>
-      ))
-    ) : (
-      <h1>(＃°Д°)还没有没有回复哦~~</h1>
-    )}
-  </div>
-);
+function showhtml(record) {
+  var html = { __html: record.content };
+
+  return <div dangerouslySetInnerHTML={html} />;
+}
+const Comment = ({ comment = [], topic }) => {
+  {
+    comment.map(v => {
+      console.log(v);
+    });
+  }
+  return (
+    <div className="comment">
+      <List
+        className="demo-loadmore-list"
+        itemLayout="horizontal"
+        dataSource={comment}
+        renderItem={item => (
+          <div>
+            <List.Item
+              actions={[
+                <UserAction
+                  replyId={item.id} //评论id
+                  ups={item.ups}
+                  replyTarId={item.reply_id} //回复目标id
+                />
+              ]}
+            >
+              <List.Item.Meta
+                avatar={<Avatar src={item.author.avatar_url} />}
+                title={
+                  <Link to={`/user/${item.author.loginname}`}>
+                    {item.author.loginname}
+                  </Link>
+                }
+                description={showhtml(item)}
+              />
+            </List.Item>
+          </div>
+        )}
+      />
+    </div>
+  );
+};
 
 export default Comment;

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 import { Header, Footer } from '../../components/index';
-import Axios from '../../util/axios';
+import axios from 'axios';
 import './home.css';
 
 import { List, Avatar, Spin } from 'antd';
@@ -22,19 +22,24 @@ class HomePage extends Component {
   componentDidMount() {
     const tab = this.props.location.search.slice(5);
     const page = this.state.page;
-    Axios.get('/topics', {
-      params: {
-        tab,
-        page
-      }
-    }).then(res => {
-      const data = res.data.data;
-      this.setState(prevState => ({
-        data: data,
-        page: prevState.page + 1,
-        loading: false
-      }));
+    this.setState({
+      loading: true
     });
+    axios
+      .get('/topics', {
+        params: {
+          tab,
+          page
+        }
+      })
+      .then(res => {
+        const data = res.data.data;
+        this.setState(prevState => ({
+          data: data,
+          page: prevState.page + 1,
+          loading: false
+        }));
+      });
   }
   componentWillReceiveProps(nextProps) {
     const tab = nextProps.location.search.slice(5);
@@ -42,15 +47,17 @@ class HomePage extends Component {
       loading: true
     });
     //切换tab后抓取新数据
-    Axios.get('/topics', {
-      params: {
-        tab
-      }
-    }).then(res => {
-      const data = res.data.data;
-      this.scroll.scrollTop = 0;
-      this.setState({ data: data});
-    });
+    axios
+      .get('/topics', {
+        params: {
+          tab
+        }
+      })
+      .then(res => {
+        const data = res.data.data;
+        this.scroll.scrollTop = 0;
+        this.setState({ data: data });
+      });
   }
   handleInfiniteOnLoad = () => {
     console.log('loading');
@@ -59,26 +66,29 @@ class HomePage extends Component {
     this.setState({
       loading: true
     });
-    Axios.get('/topics', {
-      params: {
-        tab,
-        page
-      }
-    }).then(res => {
-      const data = res.data.data;
-      this.setState(prevState => ({
-        data: prevState.data.concat(data),
-        page: prevState.page + 1,
-        loading: false
-      }));
-    });
+    axios
+      .get('/topics', {
+        params: {
+          tab,
+          page
+        }
+      })
+      .then(res => {
+        const data = res.data.data;
+        this.setState(prevState => ({
+          data: prevState.data.concat(data),
+          page: prevState.page + 1,
+          loading: false
+        }));
+      });
   };
 
   render() {
+    console.log(this.state.data);
     return (
       <React.Fragment>
         <Header />
-        <div ref={ node => this.scroll = node} className="wrapper">
+        <div ref={node => (this.scroll = node)} className="wrapper">
           <InfiniteScroll
             initialLoad={false}
             pageStart={0}
@@ -91,20 +101,27 @@ class HomePage extends Component {
               renderItem={item => (
                 <List.Item key={item.id}>
                   <List.Item.Meta
-                    avatar={<Avatar src={item.author.avatar_url} />}
-                    title={<Link to={`/topic/${item.id}`}>{item.title}</Link>}
-                    description={item.email}
-                  />
-                  <div>
-                    <span>
+                    avatar={
                       <Link to={`/user/${item.author.loginname}`}>
-                        {item.author.loginname}
+                        <Avatar src={item.author.avatar_url} />
                       </Link>
-                    </span>
-                    <span>
-                      · 发表于:{moment(`${item.create_at}`).fromNow()}
-                    </span>
-                    <span>· reply:{item.reply_count}</span>
+                    }
+                    title={<Link to={`/topic/${item.id}`}>{item.title}</Link>}
+                    description={
+                      <span>
+                        <Link to={`/user/${item.author.loginname}`}>
+                          {item.author.loginname}
+                        </Link>
+                        · 发表于:{moment(`${item.create_at}`).fromNow()} · ·
+                        reply:{item.reply_count}
+                      </span>
+                    }
+                  />
+                  <div style={{ textAlign: 'right' }}>
+                    <p>
+                      {item.reply_count}/{item.visit_count}
+                    </p>
+                    <p>{moment(item.last_reply_at).fromNow()}</p>
                   </div>
                 </List.Item>
               )}

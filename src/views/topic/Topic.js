@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import Comment from '../../components/Comment';
-import Axios from '../../util/axios';
+import axios from 'axios';
+import './topic.css';
+import { Spin } from 'antd';
 
 class Topic extends Component {
   constructor() {
@@ -14,40 +16,60 @@ class Topic extends Component {
   }
   componentDidMount() {
     const id = this.props.location.pathname;
-    Axios.get(id).then(res => {
+    axios.get(id).then(res => {
       const data = res.data.data;
       this.setState({ data: data, status: true });
       document.title = data.title;
     });
   }
   render() {
-    const wait = '正在加载中···';
+    console.log(this.props);
     return (
       <div>
-        <div className="nav topic_nav">
-          <span onClick={() => this.props.history.goBack()}>返回</span>
-          <span>
+        <header className="topic_nav">
+          <div onClick={() => this.props.history.goBack()}>返回</div>
+          <div>
             <Link to={`${this.props.location.pathname}/edit`}>编辑</Link>
-          </span>
-        </div>;
+          </div>
+        </header>
         {this.state.status ? (
           <section className="topic">
             <div className="section_header">
               <h2>{this.state.data.title}</h2>
-              <span>{this.state.data.author.loginname}</span>
-              <span>
-                发表于{moment(`${this.state.data.create_at}`).fromNow()}
-              </span>
-              <span>{this.state.data.visit_count}次观看</span>
+              <div className="topic-meta">
+                <Link to={`/user/${this.state.data.author.loginname}`}>
+                  <img
+                    className="author"
+                    src={this.state.data.author.avatar_url}
+                  />
+                </Link>
+                <div
+                  style={{ display: 'inline-block' }}
+                  className="topic-description"
+                >
+                  <p>
+                    <b>{this.state.data.author.loginname}</b>
+                  </p>
+                  <span>
+                    {this.state.data.visit_count}次观看 · 发表于{moment(
+                      `${this.state.data.create_at}`
+                    ).fromNow()}
+                  </span>
+                </div>
+              </div>
             </div>
             <div
               className="topic_contents"
-              dangerouslySetInnerHTML={{ __html: this.state.data.content }}
+              dangerouslySetInnerHTML={{
+                __html: this.state.data.content
+              }}
             />
-            <Comment comment={this.state.data.replies} />
+            <Comment comment={this.state.data.replies} topic="" />
           </section>
         ) : (
-          <h1 className="wait">{wait}</h1>
+          <div className="center">
+            <Spin size="large" />
+          </div>
         )};
       </div>
     );

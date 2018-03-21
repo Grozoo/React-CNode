@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Axios from '../../util/axios';
+import axios from 'axios';
 
 class User extends Component {
   constructor() {
@@ -10,7 +10,7 @@ class User extends Component {
   }
   componentDidMount() {
     const id = this.props.location.pathname;
-    Axios.get(id).then(res => {
+    axios.get(id).then(res => {
       const data = res.data.data;
       this.setState({ data });
     });
