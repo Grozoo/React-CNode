@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Footer } from '../../components/index';
 import axios from 'axios';
 import { message } from 'antd';
 import { Form, Icon, Input, Button } from 'antd';

@@ -8,7 +8,7 @@ function showhtml(record) {
 
   return <div dangerouslySetInnerHTML={html} />;
 }
-const Comment = ({ comment = [], topic }) => {
+const Comment = ({ comment = [], topicId }) => {
   {
     comment.map(v => {
       console.log(v);
@@ -28,6 +28,7 @@ const Comment = ({ comment = [], topic }) => {
                   replyId={item.id} //评论id
                   ups={item.ups}
                   replyTarId={item.reply_id} //回复目标id
+                  topicId={topicId}
                 />
               ]}
             >

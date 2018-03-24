@@ -1,6 +1,3 @@
-.topic {
-  padding: 0 10%;
-}
 .topic_nav {
   display: flex;
   align-items: center;
@@ -78,4 +75,36 @@ pre code {
 .topic-description p {
   font: 700 14px/20px Microsoft Yahei, serif;
   margin: 0;
+}
+#respond .text {
+  overflow: hidden;
+  width: 100%;
+  height: 160px;
+  border: lightslategray solid 1px;
+}
+.respond-header {
+  background-color: lightslategray;
+}
+.text textarea {
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  resize: none;
+}
+.text + input {
+  color: white;
+  margin-top: 10px;
+  padding: 3px 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #08c;
+  letter-spacing: 2px;
+  line-height: 2em;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.text + input:hover {
+  background-color: #05c;
 }

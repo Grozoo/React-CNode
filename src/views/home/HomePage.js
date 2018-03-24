@@ -84,7 +84,6 @@ class HomePage extends Component {
   };
 
   render() {
-    console.log(this.state.data);
     return (
       <React.Fragment>
         <Header />

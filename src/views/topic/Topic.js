@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import Comment from '../../components/Comment';
+import Comment from '../../components/comment/Comment';
 import axios from 'axios';
 import './topic.css';
-import { Spin } from 'antd';
+import { Spin, message } from 'antd';
 
 class Topic extends Component {
   constructor() {
@@ -22,8 +22,24 @@ class Topic extends Component {
       document.title = data.title;
     });
   }
+  replyTopic = () => {
+    const topicId = this.props.location.pathname.slice(7);
+    axios
+      .post(`/topic/${topicId}/replies`, {
+        accesstoken: localStorage.token,
+        content: this.textArea.value
+      })
+      .then(res => {
+        if (res.data.success) {
+          message.warning('回复成功');
+          window.location.reload();
+        } else {
+          message.warning('error');
+        }
+      });
+  };
   render() {
-    console.log(this.props);
+    const topicId = this.props.location.pathname.slice(7);
     return (
       <div>
         <header className="topic_nav">
@@ -39,6 +55,7 @@ class Topic extends Component {
               <div className="topic-meta">
                 <Link to={`/user/${this.state.data.author.loginname}`}>
                   <img
+                    alt="author"
                     className="author"
                     src={this.state.data.author.avatar_url}
                   />
@@ -64,7 +81,20 @@ class Topic extends Component {
                 __html: this.state.data.content
               }}
             />
-            <Comment comment={this.state.data.replies} topic="" />
+            <Comment comment={this.state.data.replies} topicId={topicId} />
+            <div id="respond">
+              <div className="respond-header">
+                <p>添加回复</p>
+              </div>
+              <div className="text">
+                <textarea
+                  ref={textArea => {
+                    this.textArea = textArea;
+                  }}
+                />
+              </div>
+              <input onClick={this.replyTopic} type="submit" value="回复" />
+            </div>
           </section>
         ) : (
           <div className="center">

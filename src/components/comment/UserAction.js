@@ -57,7 +57,7 @@ class UpReply extends Component {
   };
   reply = () => {
     axios
-      .post(`${this.props.tipcId}/replies`, {
+      .post(`/topic/${this.props.topicId}/replies`, {
         accesstoken: localStorage.token,
         content: this.state.content,
         reply_id: this.props.replyId
@@ -67,7 +67,6 @@ class UpReply extends Component {
       });
   };
   render() {
-    console.log(this.props);
     return (
       <div className="user_action">
         <span onClick={this.up} style={{ padding: '0 4px ' }}>

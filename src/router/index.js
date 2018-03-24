@@ -52,7 +52,14 @@ const Routes = () => {
           <Route path="/user/:loginname" component={User} />
           <Route path="*" component={NotMatch} />
         </Switch>
-        <Affix style={{ position: 'absolute', bottom: '10%', right: '10%', cursor: "pointer" }}>
+        <Affix
+          style={{
+            position: 'fixed',
+            bottom: '10%',
+            right: '10%',
+            cursor: 'pointer'
+          }}
+        >
           <i
             onClick={() =>
               (window.location = 'https://github.com/ShiYiYa/cnode')
