@@ -6,8 +6,8 @@
 ## 开始
 
 ```powershell
-$ git clone git@github.com:RRung/cnode.git
-$ cd cnode
+$ git clone git@github.com:ShiYiYa/React-CNode.git
+$ cd React-CNode
 $ yarn install
 $ yarn start
  ```
