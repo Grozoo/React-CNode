@@ -1,17 +1,16 @@
 ## 预览
-![](https://github.com/RRung/cnode/blob/master/assets/HomePage.png)
-![](https://github.com/RRung/cnode/blob/master/assets/Topics.png)  
-![](https://github.com/RRung/cnode/blob/master/assets/Loading.png)
-![](https://github.com/RRung/cnode/blob/master/assets/UserHome.png)  
 
-[在线地址：React-CNode](http://cnode.runtua.cn/)    
+[在线地址：React-CNode](https://cnode.runtua.cn/)  
+[Last：React-CNode](http://cnode.runtua.cn/last)
 
 ## 开始
 
-```$ git clone git@github.com:RRung/cnode.git```  
-```$ cd cnode```  
-```$ yarn install```  
-```$ yarn start```
+```powershell
+$ git clone git@github.com:RRung/cnode.git
+$ cd cnode
+$ yarn install
+$ yarn start
+ ```
 
 ## Use
 - [Create React App](https://github.com/facebookincubator/create-react-app)
