@@ -1,10 +1,16 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Menu } from 'antd';
+import { Menu, Icon } from 'antd';
+import './header.css';
+
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
 
 class Header extends React.Component {
   state = {
-    current: window.location.search.slice(5) || 'all'
+    current: window.location.pathname.substr(1)
+      ? window.location.pathname.substr(1)
+      : window.location.search.slice(5) || 'all'
   };
   handleClick = e => {
     this.setState({
@@ -42,6 +48,27 @@ class Header extends React.Component {
           <Menu.Item key="dev">
             <NavLink to={{ pathname: '/', search: '?tab=dev' }}>测试区</NavLink>
           </Menu.Item>
+          <SubMenu
+            title={
+              <span>
+                <Icon type="setting" />
+              </span>
+            }
+          >
+            <MenuItemGroup title="Setting">
+              <Menu.Item key="newtopic">
+                <NavLink to="/newtopic">发表</NavLink>
+              </Menu.Item>
+              <Menu.Item key="messages">
+                {' '}
+                <NavLink to="/messages">消息</NavLink>
+              </Menu.Item>
+              <Menu.Item key="login">
+                {' '}
+                <NavLink to="/login">我的</NavLink>
+              </Menu.Item>
+            </MenuItemGroup>
+          </SubMenu>
         </Menu>
       </header>
     );

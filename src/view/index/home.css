@@ -1,0 +1,22 @@
+.main {
+  margin-top: 48px;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  overflow: auto;
+  padding: 8px 24px;
+  height: calc(100% - 48px); }
+  .main .loading {
+    position: absolute;
+    bottom: -40px;
+    left: 50%; }
+  .main #components-back-top-demo-custom .ant-back-top {
+    bottom: 100px; }
+    .main #components-back-top-demo-custom .ant-back-top #components-back-top-demo-custom .ant-back-top-inner {
+      height: 40px;
+      width: 40px;
+      line-height: 40px;
+      border-radius: 4px;
+      background-color: #1088e9;
+      color: #fff;
+      text-align: center;
+      font-size: 20px; }

@@ -1,8 +1,6 @@
-.ant-menu {
-  display: flex;
-}
-.ant-menu-item {
-  flex: 1 1;
-  text-align: center;
-  line-height: 51px;
-}
+body, #root {
+  height: 100%;
+  overflow: hidden; }
+
+body #root {
+  width: 100%; }

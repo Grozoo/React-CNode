@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import Comment from '../../components/comment/Comment';
+import Comment from '../../component/comment/Comment';
 import axios from 'axios';
 import './topic.css';
-import { Spin, message } from 'antd';
+import { Spin, message, Icon } from 'antd';
 
 class Topic extends Component {
   constructor() {
@@ -41,13 +41,7 @@ class Topic extends Component {
   render() {
     const topicId = this.props.location.pathname.slice(7);
     return (
-      <div>
-        <header className="topic_nav">
-          <div onClick={() => this.props.history.goBack()}>返回</div>
-          <div>
-            <Link to={`${this.props.location.pathname}/edit`}>编辑</Link>
-          </div>
-        </header>
+      <React.Fragment>
         {this.state.status ? (
           <section className="topic">
             <div className="section_header">
@@ -97,11 +91,23 @@ class Topic extends Component {
             </div>
           </section>
         ) : (
-          <div className="center">
-            <Spin size="large" />
+            <div className="center">
+              <Spin size="large" />
+            </div>
+          )};
+          <footer className="topic_nav">
+          <div onClick={() => this.props.history.goBack()}>
+            <Icon type="left-circle" style={{ fontSize: 24, color: "rgb(0, 0, 0)" }} />
           </div>
-        )};
-      </div>
+          <div>
+            <Icon type="exclamation-circle" style={{ fontSize: 24, color: "rgb(0, 0, 0)" }} />
+            {/*为主人时显示，编辑*/}
+            {/* <Link to={`${this.props.location.pathname}/edit`}>
+              <Icon type="edit" style={{ fontSize: 24, color: "rgb(0, 0, 0)" }} />
+            </Link> */}
+          </div>
+        </footer>
+      </React.Fragment>
     );
   }
 }

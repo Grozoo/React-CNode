@@ -9,11 +9,6 @@ function showhtml(record) {
   return <div dangerouslySetInnerHTML={html} />;
 }
 const Comment = ({ comment = [], topicId }) => {
-  {
-    comment.map(v => {
-      console.log(v);
-    });
-  }
   return (
     <div className="comment">
       <List

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { BackTop } from 'antd';
 
-import { Header, Footer } from '../../components/index';
 import axios from 'axios';
 import './home.css';
 
@@ -18,6 +18,7 @@ class HomePage extends Component {
       loading: false,
       hasMore: true
     };
+    this.scroll = React.createRef();
   }
   componentDidMount() {
     const tab = this.props.location.search.slice(5);
@@ -25,13 +26,12 @@ class HomePage extends Component {
     this.setState({
       loading: true
     });
-    axios
-      .get('/topics', {
-        params: {
-          tab,
-          page
-        }
-      })
+    axios.get('/topics', {
+      params: {
+        tab,
+        page
+      }
+    })
       .then(res => {
         const data = res.data.data;
         this.setState(prevState => ({
@@ -41,38 +41,41 @@ class HomePage extends Component {
         }));
       });
   }
+  //不能使用async，会导致组件无法立即更新，暂时用废弃方案......
+  /*  static async getDerivedStateFromProps(nextProps, prevState) {
+     const tab = nextProps.location.search.slice(5);
+     let response = await axios.get('/topics', { params: tab });
+     return { data: response.data.data }
+   } */
   componentWillReceiveProps(nextProps) {
     const tab = nextProps.location.search.slice(5);
     this.setState({
       loading: true
     });
-    //切换tab后抓取新数据
-    axios
-      .get('/topics', {
-        params: {
-          tab
-        }
-      })
+    axios.get('/topics', {
+      params: {
+        tab
+      }
+    })
       .then(res => {
         const data = res.data.data;
-        this.scroll.scrollTop = 0;
+        this.scroll.current.scrollTop = 0;
         this.setState({ data: data });
       });
   }
   handleInfiniteOnLoad = () => {
-    console.log('loading');
     const tab = this.props.location.search.slice(5);
     const page = this.state.page;
     this.setState({
+      data: [],
       loading: true
     });
-    axios
-      .get('/topics', {
-        params: {
-          tab,
-          page
-        }
-      })
+    axios.get('/topics', {
+      params: {
+        tab,
+        page
+      }
+    })
       .then(res => {
         const data = res.data.data;
         this.setState(prevState => ({
@@ -84,10 +87,10 @@ class HomePage extends Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <React.Fragment>
-        <Header />
-        <div ref={node => (this.scroll = node)} className="wrapper">
+        <div ref={this.scroll} className="main">
           <InfiniteScroll
             initialLoad={false}
             pageStart={0}
@@ -117,9 +120,7 @@ class HomePage extends Component {
                     }
                   />
                   <div style={{ textAlign: 'right' }}>
-                    <p>
-                      {item.reply_count}/{item.visit_count}
-                    </p>
+                    <p>{item.reply_count}/{item.visit_count}</p>
                     <p>{moment(item.last_reply_at).fromNow()}</p>
                   </div>
                 </List.Item>
@@ -130,7 +131,7 @@ class HomePage extends Component {
             </List>
           </InfiniteScroll>
         </div>
-        <Footer />
+        <BackTop target={() => this.scroll.current} />
       </React.Fragment>
     );
   }
