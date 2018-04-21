@@ -8,6 +8,7 @@ const AsyncHomePage = asyncComponent(() => import('../view/index/'));
 const AsyncTopic = asyncComponent(() => import('../view/topic/Topic'));
 const AsyncLogin = asyncComponent(() => import('../view/login/Login'));
 const AsyncUser = asyncComponent(() => import('../view/user/User'));
+const AsyncNotMatch = asyncComponent(() => import('../view/404/404'));
 
 const Routes = () => (
   <BrowserRouter>
@@ -24,7 +25,7 @@ const Routes = () => (
       <LoginComponent path="/userhome" component={UserHome} />
       <Route path="/topic/:id/edit" component={Update} /> */}
 
-        {/* <Route path="*" component={NotMatch} /> */}
+        <Route path="*" component={AsyncNotMatch} />
       </Switch>
     </React.Fragment>
   </BrowserRouter>

@@ -13,6 +13,7 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      C: this,
       page: 1,
       data: [],
       loading: false,
@@ -41,33 +42,37 @@ class HomePage extends Component {
         }));
       });
   }
-  //不能使用async，会导致组件无法立即更新，暂时用废弃方案......
-  /*  static async getDerivedStateFromProps(nextProps, prevState) {
-     const tab = nextProps.location.search.slice(5);
-     let response = await axios.get('/topics', { params: tab });
-     return { data: response.data.data }
-   } */
-  componentWillReceiveProps(nextProps) {
+  //这里不能异步，以下为骚操作，请勿模仿。
+  static getDerivedStateFromProps(nextProps, prevState) {
     const tab = nextProps.location.search.slice(5);
-    this.setState({
-      loading: true
-    });
-    axios.get('/topics', {
-      params: {
-        tab
-      }
-    })
-      .then(res => {
-        const data = res.data.data;
-        this.scroll.current.scrollTop = 0;
-        this.setState({ data: data });
-      });
-  }
+    axios.get('/topics', { params: { tab: tab } })
+      .then(_ => {
+        const data = _.data.data;
+        prevState.C.scroll.current.scrollTop = 0;
+        prevState.C.setState({ data: data });
+      })
+    return true;
+  };
+  /*  componentWillReceiveProps(nextProps) {
+     const tab = nextProps.location.search.slice(5);
+     this.setState({
+       loading: true
+     });
+     axios.get('/topics', {
+       params: {
+         tab
+       }
+     })
+       .then(res => {
+         const data = res.data.data;
+         this.scroll.current.scrollTop = 0;
+         this.setState({ data: data });
+       });
+   } */
   handleInfiniteOnLoad = () => {
     const tab = this.props.location.search.slice(5);
     const page = this.state.page;
     this.setState({
-      data: [],
       loading: true
     });
     axios.get('/topics', {
@@ -87,7 +92,7 @@ class HomePage extends Component {
   };
 
   render() {
-    console.log(this.state);
+    //console.log(this.state);
     return (
       <React.Fragment>
         <div ref={this.scroll} className="main">

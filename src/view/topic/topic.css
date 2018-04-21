@@ -8,11 +8,12 @@
   background-color: #f3f3f0;
   border-top: #777777 2px solid; }
   .topic_nav div {
+    cursor: pointer;
     flex: 1 1 auto;
     line-height: 48px; }
 
 section.topic {
-  padding: 48px 10%;
+  padding: 50px 10%;
   height: 100%;
   overflow: auto; }
   section.topic img {
@@ -54,7 +55,7 @@ section.topic {
     height: 160px;
     border: lightslategray solid 1px; }
   section.topic .respond-header {
-    background-color: lightslategray; }
+    border-top: #777777 2px dashed; }
   section.topic .text textarea {
     border: none;
     outline: none;
@@ -75,8 +76,9 @@ section.topic {
   section.topic .text + input:hover {
     background-color: #05c; }
 
-.center {
-  text-align: center; }
+.loading {
+  text-align: center;
+  margin-top: 55px; }
 
 *::selection {
   background-color: #a4a9ad; }

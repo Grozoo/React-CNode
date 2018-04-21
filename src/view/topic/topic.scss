@@ -8,17 +8,20 @@
   background-color: #f3f3f0;
   border-top: #777777 2px solid;
   div{
+    cursor: pointer;
     flex: 1 1 auto;
     line-height: 48px;
   }
 }
 section.topic{
-  padding: 48px 10%;
+  //margin: 50px 50px;
+  padding: 50px 10%;
   height: 100%;
   overflow: auto;
   img {
     max-width: 100%;
   }
+  
   .section_header {
     padding-bottom: 20px;
   }
@@ -67,7 +70,7 @@ section.topic{
     border: lightslategray solid 1px;
   }
   .respond-header {
-    background-color: lightslategray;
+    border-top: #777777 2px dashed;
   }
   .text textarea {
     border: none;
@@ -94,9 +97,10 @@ section.topic{
   }
 
 }
-.center {
-  text-align: center;
-}
+  .loading{
+    text-align: center;
+    margin-top: 55px;
+  }
 
 *::selection {
   background-color: #a4a9ad;

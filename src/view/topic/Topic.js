@@ -23,6 +23,10 @@ class Topic extends Component {
     });
   }
   replyTopic = () => {
+    if (this.textArea.value === '') {
+      message.warning('写点什么吧');
+      return 0;
+    }
     const topicId = this.props.location.pathname.slice(7);
     axios
       .post(`/topic/${topicId}/replies`, {
@@ -31,12 +35,14 @@ class Topic extends Component {
       })
       .then(res => {
         if (res.data.success) {
-          message.warning('回复成功');
+          message.success('回复成功');
           window.location.reload();
-        } else {
-          message.warning('error');
         }
-      });
+      })
+      .catch(_ => {
+        message.error('error')
+      })
+
   };
   render() {
     const topicId = this.props.location.pathname.slice(7);
@@ -78,7 +84,7 @@ class Topic extends Component {
             <Comment comment={this.state.data.replies} topicId={topicId} />
             <div id="respond">
               <div className="respond-header">
-                <p>添加回复</p>
+                <h3>添加回复</h3>
               </div>
               <div className="text">
                 <textarea
@@ -91,7 +97,7 @@ class Topic extends Component {
             </div>
           </section>
         ) : (
-            <div className="center">
+            <div className="loading">
               <Spin size="large" />
             </div>
           )};
