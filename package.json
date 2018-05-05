@@ -2,10 +2,14 @@
   "name": "cnode",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://cnode.runtua.cn/last",
+  "homepage": "http://cnode.runtua.cn",
   "dependencies": {
     "antd": "^3.3.0",
     "axios": "^0.18.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react-app": "^3.1.1",
+    "express": "^4.16.3",
+    "ignore-styles": "^5.0.1",
     "lint-staged": "^7.0.4",
     "moment": "^2.20.1",
     "node-sass-chokidar": "^1.2.2",
@@ -22,6 +26,7 @@
     "react-app-rewired": "^1.5.0"
   },
   "scripts": {
+    "server": "set NODE_ENV=production node src/server/bootstrap.js",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "yarn build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "react-app-rewired start",

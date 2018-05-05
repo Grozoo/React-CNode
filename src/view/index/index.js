@@ -42,18 +42,17 @@ class HomePage extends Component {
         }));
       });
   }
-  //这里不能异步，以下为骚操作，请勿模仿。
-  static getDerivedStateFromProps(nextProps, prevState) {
+  /* static getDerivedStateFromProps(nextProps, prevState) {
     const tab = nextProps.location.search.slice(5);
     axios.get('/topics', { params: { tab: tab } })
       .then(_ => {
         const data = _.data.data;
         prevState.C.scroll.current.scrollTop = 0;
         prevState.C.setState({ data: data });
-      })
+      });
     return true;
-  };
-  /*  componentWillReceiveProps(nextProps) {
+  }; */
+    componentWillReceiveProps(nextProps) {
      const tab = nextProps.location.search.slice(5);
      this.setState({
        loading: true
@@ -68,7 +67,8 @@ class HomePage extends Component {
          this.scroll.current.scrollTop = 0;
          this.setState({ data: data });
        });
-   } */
+   };
+
   handleInfiniteOnLoad = () => {
     const tab = this.props.location.search.slice(5);
     const page = this.state.page;
@@ -92,7 +92,6 @@ class HomePage extends Component {
   };
 
   render() {
-    //console.log(this.state);
     return (
       <React.Fragment>
         <div ref={this.scroll} className="main">

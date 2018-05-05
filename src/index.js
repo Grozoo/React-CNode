@@ -7,8 +7,6 @@ import Routes from './router';
 axios.defaults.baseURL = 'https://cnodejs.org/api/v1/';
 
 ReactDom.render(
-  <React.Fragment>
-    <Routes />
-  </React.Fragment>,
+  <Routes />,
   document.getElementById('root')
 );
