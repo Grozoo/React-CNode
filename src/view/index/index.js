@@ -42,7 +42,7 @@ class HomePage extends Component {
         }));
       });
   }
-  /* static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps, prevState) {
     const tab = nextProps.location.search.slice(5);
     axios.get('/topics', { params: { tab: tab } })
       .then(_ => {
@@ -51,23 +51,23 @@ class HomePage extends Component {
         prevState.C.setState({ data: data });
       });
     return true;
-  }; */
-    componentWillReceiveProps(nextProps) {
-     const tab = nextProps.location.search.slice(5);
-     this.setState({
-       loading: true
+  };
+  /* componentWillReceiveProps(nextProps) {
+   const tab = nextProps.location.search.slice(5);
+   this.setState({
+     loading: true
+   });
+   axios.get('/topics', {
+     params: {
+       tab
+     }
+   })
+     .then(res => {
+       const data = res.data.data;
+       this.scroll.current.scrollTop = 0;
+       this.setState({ data: data });
      });
-     axios.get('/topics', {
-       params: {
-         tab
-       }
-     })
-       .then(res => {
-         const data = res.data.data;
-         this.scroll.current.scrollTop = 0;
-         this.setState({ data: data });
-       });
-   };
+ }; */
 
   handleInfiniteOnLoad = () => {
     const tab = this.props.location.search.slice(5);
